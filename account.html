@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account – AutoJob</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233CACD7'/%3E%3Ctext x='16' y='23' font-family='Montserrat,sans-serif' font-weight='800' font-size='20' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .profile-cover { background: linear-gradient(135deg, var(--aj-primary) 0%, var(--aj-primary-dark) 100%); height: 140px; border-radius: 12px 12px 0 0; position: relative; }
+        .profile-avatar { width: 90px; height: 90px; border-radius: 50%; border: 4px solid #fff; background: var(--aj-section-light); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 2rem; color: var(--aj-heading); position: absolute; bottom: -45px; left: 2rem; }
+        .profile-info { padding: 3rem 2rem 1.5rem 2rem; }
+        .account-card { border: 1px solid var(--aj-border); border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden; }
+        .account-card .card-header { background: var(--aj-section-light); padding: 0.85rem 1.5rem; font-weight: 700; font-size: 0.9rem; border-bottom: 1px solid var(--aj-border); }
+        .account-card .card-body { padding: 1.5rem; }
+        .form-label { font-weight: 600; font-size: 0.85rem; color: var(--aj-heading); }
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .sidebar-menu li a { display: block; padding: 0.6rem 1rem; border-radius: 8px; color: var(--aj-body); font-size: 0.88rem; font-weight: 500; transition: all 0.2s; }
+        .sidebar-menu li a:hover, .sidebar-menu li a.active { background: var(--aj-section-light); color: var(--aj-primary); }
+        .sidebar-menu li a.active { font-weight: 700; }
+        .avatar-upload { position: relative; display: inline-block; cursor: pointer; }
+        .avatar-upload .overlay { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.6); color: #fff; font-size: 0.65rem; padding: 2px 10px; border-radius: 10px; white-space: nowrap; opacity: 0; transition: opacity 0.2s; }
+        .avatar-upload:hover .overlay { opacity: 1; }
+        .avatar-upload input[type="file"] { display: none; }
+        .user-dropdown .dropdown-toggle::after { display: none; }
+        .user-dropdown .avatar-sm { width: 32px; height: 32px; border-radius: 50%; background: var(--aj-section-light); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: var(--aj-heading); margin-right: 0.4rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AutoJob</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="train.html">Train AI</a></li>
+                    <li class="nav-item dropdown user-dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+                            <span class="avatar-sm">PT</span>
+                            <span class="d-none d-md-inline">PT. Aceh Sejahtera</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item active" href="account.html">Account</a></li>
+                            <li><a class="dropdown-item" href="account.html">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="index.html">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="row g-4">
+            <div class="col-lg-3">
+                <div class="account-card">
+                    <div class="card-body">
+                        <ul class="sidebar-menu">
+                            <li><a href="#" class="active">Profile</a></li>
+                            <li><a href="#">Company info</a></li>
+                            <li><a href="#">Password & security</a></li>
+                            <li><a href="#">Notifications</a></li>
+                            <li><a href="#">Billing</a></li>
+                            <li><hr class="my-2"></li>
+                            <li><a href="index.html" class="text-danger">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+
+                <div class="account-card">
+                    <div class="profile-cover"></div>
+                    <div class="profile-info">
+                        <div class="d-flex align-items-start justify-content-between">
+                            <div class="d-flex align-items-end gap-3" style="margin-top:-60px;">
+                                <div class="avatar-upload">
+                                    <div class="profile-avatar">PT</div>
+                                    <div class="overlay">Change photo</div>
+                                    <input type="file" accept="image/*">
+                                </div>
+                                <div>
+                                    <h4 class="mb-0" style="font-weight:800;">PT. Aceh Sejahtera</h4>
+                                    <span class="text-muted small">Environmental consulting &middot; Banda Aceh</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm">Edit profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-card">
+                    <div class="card-header">Company details</div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Company name</label>
+                                <input type="text" class="form-control" value="PT. Aceh Sejahtera">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" value="contact@acehsejahtera.id">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Phone</label>
+                                <input type="text" class="form-control" value="+62 812 3456 7890">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Website</label>
+                                <input type="text" class="form-control" value="https://acehsejahtera.id">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Location</label>
+                                <select class="form-select">
+                                    <option selected>Banda Aceh</option>
+                                    <option>Jakarta</option>
+                                    <option>Yogyakarta</option>
+                                    <option>Bali</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Industry</label>
+                                <select class="form-select">
+                                    <option selected>Environment & Conservation</option>
+                                    <option>Education & Training</option>
+                                    <option>Public Health</option>
+                                    <option>Social Impact</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Company size</label>
+                                <select class="form-select">
+                                    <option>1-10 employees</option>
+                                    <option selected>11-50 employees</option>
+                                    <option>51-200 employees</option>
+                                    <option>201+ employees</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Bio / About</label>
+                                <textarea class="form-control" rows="3">Leading environmental consulting firm based in Banda Aceh, specializing in sustainable development, community empowerment, and conservation projects across Aceh province.</textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">AI agent training summary</label>
+                                <input type="text" class="form-control bg-light" value="3 job agents active &middot; Last trained: June 16, 2026" readonly style="color:var(--aj-heading);">
+                            </div>
+                        </div>
+                        <div class="mt-3 text-end">
+                            <button class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-card">
+                    <div class="card-header">Password & security</div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Current password</label>
+                                <input type="password" class="form-control" value="············">
+                            </div>
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <label class="form-label">New password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Confirm new password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="mt-3 text-end">
+                            <button class="btn btn-outline-primary">Update password</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-card">
+                    <div class="card-header">Notification preferences</div>
+                    <div class="card-body">
+                        <div class="d-flex flex-column gap-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="notifApp" checked>
+                                <label class="form-check-label" for="notifApp">New applicant matches</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="notifMsg" checked>
+                                <label class="form-check-label" for="notifMsg">Messages from candidates</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="notifReport" checked>
+                                <label class="form-check-label" for="notifReport">Weekly AI agent report</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="notifPromo">
+                                <label class="form-check-label" for="notifPromo">Product updates &amp; tips</label>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-end">
+                            <button class="btn btn-primary">Save preferences</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h6>AutoJob</h6>
+                    <p class="small" style="color:var(--aj-dark-text);">Connecting job seekers and employers through smart resume-based matching. Find your next opportunity or hire top talent today.</p>
+                </div>
+                <div class="col-md-2">
+                    <h6>Quick Links</h6>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="jobs.html">Browse Jobs</a></li>
+                        <li><a href="train.html">Train AI Agent</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Legal</h6>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                        <li><a href="privacy.html">Cookie Policy</a></li>
+                        <li><a href="privacy.html">Data Protection</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Contact</h6>
+                    <ul>
+                        <li><a href="#">support@autojob.id</a></li>
+                        <li><a href="#">Jakarta, Indonesia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="text-center footer-bottom">&copy; 2025 AutoJob. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

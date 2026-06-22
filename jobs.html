@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoJob – Find Jobs & Hire Top Talent</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233CACD7'/%3E%3Ctext x='16' y='23' font-family='Montserrat,sans-serif' font-weight='800' font-size='20' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AutoJob</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="train.html">Train AI</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-primary btn-sm me-2" href="register.html">Register</a></li>
+                    <li class="nav-item"><a class="btn btn-primary btn-sm" href="signin.html">Sign In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Jobs</li>
+                </ol>
+            </nav>
+            <button class="btn btn-primary btn-sm filter-toggle-mobile" onclick="toggleMobileFilter()">Filters</button>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-3">
+                <div class="filter-sidebar-wrap" id="filterWrap">
+                    <div class="filter-sidebar">
+                        <button class="filter-sidebar-close d-lg-none" onclick="toggleMobileFilter()">&times;</button>
+
+                        <div class="filter-group">
+                            <h6>Search</h6>
+                            <input type="text" class="form-control form-control-sm" placeholder="Job title, skill...">
+                        </div>
+
+                        <div class="filter-group">
+                            <h6>Location</h6>
+                            <select class="form-select form-select-sm">
+                                <option>All locations</option>
+                                <option>Banda Aceh</option>
+                                <option>Jakarta</option>
+                                <option>Yogyakarta</option>
+                                <option>Bali</option>
+                                <option>Bandung</option>
+                                <option>Surabaya</option>
+                                <option>Makassar</option>
+                                <option>Lombok</option>
+                                <option>Flores</option>
+                                <option>Kalimantan</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <h6>Category</h6>
+                            <div class="d-flex flex-column gap-1">
+                                <div class="form-check"><input class="form-check-input" type="checkbox" id="catAll" checked><label class="form-check-label" for="catAll">All categories</label></div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Circular economy</label></div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Environment</label></div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Education</label></div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Marine conservation</label></div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Public health</label></div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Social impact</label></div>
+                                <div class="extra-cats d-none">
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Ethical trade</label></div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Humanitarian aid</label></div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Water & sanitation</label></div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Urban development</label></div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Climate action</label></div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Gender equality</label></div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Agriculture</label></div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Waste management</label></div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Sustainable tourism</label></div>
+                                </div>
+                                <a href="#" class="filter-view-more" onclick="toggleExtraCats(event)">View more</a>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <h6>Job type</h6>
+                            <div class="d-flex flex-column gap-1">
+                                <div class="form-check"><input class="form-check-input" type="checkbox" id="typeIntern"><label class="form-check-label" for="typeIntern">Internship</label></div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox" id="typeContract"><label class="form-check-label" for="typeContract">Long-term contract</label></div>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <h6>Remote</h6>
+                            <select class="form-select form-select-sm">
+                                <option>All</option>
+                                <option>No remote</option>
+                                <option>Remote friendly</option>
+                                <option>Hybrid</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <h6>Experience</h6>
+                            <select class="form-select form-select-sm">
+                                <option>Any experience</option>
+                                <option>0-2 years</option>
+                                <option>3-5 years</option>
+                                <option>5-10 years</option>
+                                <option>10+ years</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-primary w-100 btn-sm">Apply filters</button>
+                        <button class="btn btn-outline-primary w-100 btn-sm mt-2">Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="d-flex flex-column gap-3" id="jobList">
+
+                    <div class="job-card-mkt anim-fade-up">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Community & Sustainable Market Development Coordinator</a></span>
+                            <span class="type-badge">Internship</span>
+                            <span class="card-date">Posted 06-16-2026</span>
+                        </div>
+                        <div class="card-byline">Natural Aceh<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">24 offers &middot; No remote &middot; Start June 2026</div>
+                        <div class="card-desc">Empowering coastal communities through sustainable livelihoods, environmental conservation, and inclusive development for a better future.</div>
+                        <div class="card-labels">
+                            <span class="label">Banda Aceh</span>
+                            <span class="label">Circular economy</span>
+                            <span class="label">0 to 5 yrs exp</span>
+                            <span class="label">Long-term contract</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-mkt anim-fade-up anim-delay-1">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Reforestation Program Manager</a></span>
+                            <span class="type-badge">Long-term contract</span>
+                            <span class="card-date">Posted 06-15-2026</span>
+                        </div>
+                        <div class="card-byline">GreenForest Initiative<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">18 offers &middot; Remote friendly &middot; Start August 2026</div>
+                        <div class="card-desc">Leading large-scale reforestation projects across Southeast Asia, working with local communities and government agencies.</div>
+                        <div class="card-labels">
+                            <span class="label">Jakarta</span>
+                            <span class="label">Environment</span>
+                            <span class="label">3 to 10 yrs exp</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-mkt anim-fade-up anim-delay-2">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Digital Skills Trainer – Rural Communities</a></span>
+                            <span class="type-badge">Internship</span>
+                            <span class="card-date">Posted 06-13-2026</span>
+                        </div>
+                        <div class="card-byline">TechEdu Foundation<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">12 offers &middot; No remote &middot; Start July 2026</div>
+                        <div class="card-desc">Delivering digital literacy programs to underserved rural communities, focusing on basic IT skills and remote work readiness.</div>
+                        <div class="card-labels">
+                            <span class="label">Yogyakarta</span>
+                            <span class="label">Education</span>
+                            <span class="label">1 to 4 yrs exp</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-mkt anim-fade-up anim-delay-3">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Marine Conservation Field Officer</a></span>
+                            <span class="type-badge">Internship</span>
+                            <span class="card-date">Posted 06-09-2026</span>
+                        </div>
+                        <div class="card-byline">OceanCare ID<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">9 offers &middot; No remote &middot; Start September 2026</div>
+                        <div class="card-desc">Monitoring marine biodiversity, coordinating with local fishermen, and implementing conservation strategies in coastal protected areas.</div>
+                        <div class="card-labels">
+                            <span class="label">Raja Ampat</span>
+                            <span class="label">Marine conservation</span>
+                            <span class="label">2 to 6 yrs exp</span>
+                            <span class="label">Long-term contract</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-mkt anim-fade-up anim-delay-4">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Grant Writer & Fundraising Coordinator</a></span>
+                            <span class="type-badge">Long-term contract</span>
+                            <span class="card-date">Posted 06-08-2026</span>
+                        </div>
+                        <div class="card-byline">Social Impact Hub<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">21 offers &middot; Hybrid &middot; Start August 2026</div>
+                        <div class="card-desc">Researching grant opportunities, writing proposals, and managing donor relationships to fund social impact programs across Indonesia.</div>
+                        <div class="card-labels">
+                            <span class="label">Bali</span>
+                            <span class="label">Social impact</span>
+                            <span class="label">2 to 8 yrs exp</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-mkt anim-fade-up anim-delay-1">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Community Health Program Coordinator</a></span>
+                            <span class="type-badge">Long-term contract</span>
+                            <span class="card-date">Posted 06-02-2026</span>
+                        </div>
+                        <div class="card-byline">HealthBridge Foundation<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">15 offers &middot; No remote &middot; Start October 2026</div>
+                        <div class="card-desc">Managing community health initiatives focused on maternal health, nutrition education, and access to clean water in rural areas.</div>
+                        <div class="card-labels">
+                            <span class="label">Flores</span>
+                            <span class="label">Public health</span>
+                            <span class="label">3 to 7 yrs exp</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-mkt anim-fade-up anim-delay-2">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Supply Chain Ethics & Compliance Officer</a></span>
+                            <span class="type-badge">Long-term contract</span>
+                            <span class="card-date">Posted 06-01-2026</span>
+                        </div>
+                        <div class="card-byline">FairTrade Indonesia<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">11 offers &middot; Remote friendly &middot; Start July 2026</div>
+                        <div class="card-desc">Auditing supply chains for ethical practices, ensuring fair wages, safe working conditions, and environmental compliance.</div>
+                        <div class="card-labels">
+                            <span class="label">Surabaya</span>
+                            <span class="label">Ethical trade</span>
+                            <span class="label">4 to 10 yrs exp</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-mkt anim-fade-up anim-delay-3">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Plastic Waste Management Specialist</a></span>
+                            <span class="type-badge">Internship</span>
+                            <span class="card-date">Posted 05-26-2026</span>
+                        </div>
+                        <div class="card-byline">Waste Solutions ID<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">7 offers &middot; No remote &middot; Start November 2026</div>
+                        <div class="card-desc">Designing and implementing plastic waste reduction programs in urban areas, working with local governments and community groups.</div>
+                        <div class="card-labels">
+                            <span class="label">Bandung</span>
+                            <span class="label">Waste management</span>
+                            <span class="label">1 to 5 yrs exp</span>
+                            <span class="label">Long-term contract</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-mkt anim-fade-up anim-delay-4">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Women Entrepreneurship Program Lead</a></span>
+                            <span class="type-badge">Long-term contract</span>
+                            <span class="card-date">Posted 05-22-2026</span>
+                        </div>
+                        <div class="card-byline">Women Empowerment Network<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">14 offers &middot; No remote &middot; Start September 2026</div>
+                        <div class="card-desc">Training and mentoring women entrepreneurs in rural communities, providing business skills, access to micro-finance, and market linkages.</div>
+                        <div class="card-labels">
+                            <span class="label">Makassar</span>
+                            <span class="label">Gender equality</span>
+                            <span class="label">5 to 12 yrs exp</span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-mkt anim-fade-up anim-delay-1">
+                        <div class="card-title-row">
+                            <span class="title"><a href="#" class="job-link">Sustainable Agriculture Research Assistant</a></span>
+                            <span class="type-badge">Internship</span>
+                            <span class="card-date">Posted 05-20-2026</span>
+                        </div>
+                        <div class="card-byline">AgroEco Institute<span class="verified-badge">&#10003;</span></div>
+                        <div class="card-rate">6 offers &middot; No remote &middot; Start June 2026</div>
+                        <div class="card-desc">Conducting field research on regenerative farming practices, soil health, and crop diversity to support smallholder farmers.</div>
+                        <div class="card-labels">
+                            <span class="label">Lombok</span>
+                            <span class="label">Agriculture</span>
+                            <span class="label">0 to 3 yrs exp</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h6>AutoJob</h6>
+                    <p class="small" style="color:var(--aj-dark-text);">Connecting job seekers and employers through smart resume-based matching. Find your next opportunity or hire top talent today.</p>
+                </div>
+                <div class="col-md-2">
+                    <h6>Quick Links</h6>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="jobs.html">Browse Jobs</a></li>
+                        <li><a href="train.html">Train AI</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Legal</h6>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                        <li><a href="privacy.html#cookies">Cookie Policy</a></li>
+                        <li><a href="privacy.html#security">Data Protection</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Contact</h6>
+                    <ul>
+                        <li><a href="#">support@autojob.id</a></li>
+                        <li><a href="#">Jakarta, Indonesia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="text-center footer-bottom">&copy; 2025 AutoJob. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        const extraJobs = [
+            {org:'Disaster Response Unit', title:'Emergency Logistics Coordinator', labels:['Central Sulawesi','Humanitarian aid','3 to 8 yrs exp'], type:'Long-term contract', rate:'8 offers &middot; No remote &middot; Start December 2026', desc:'Coordinating emergency supply chains and distribution of aid materials during natural disasters.', posted:'05-15-2026', verified:true},
+            {org:'EcoTourism Alliance', title:'Community-Based Tourism Developer', labels:['Flores','Sustainable tourism','1 to 5 yrs exp'], type:'Internship', rate:'13 offers &middot; Remote friendly &middot; Start August 2026', desc:'Developing eco-tourism programs that generate income for local communities while preserving cultural heritage.', posted:'05-10-2026', verified:true},
+            {org:'Clean Water for All', title:'WASH Program Manager', labels:['East Nusa Tenggara','Water & sanitation','5 to 12 yrs exp'], type:'Long-term contract', rate:'10 offers &middot; No remote &middot; Start January 2027', desc:'Leading water, sanitation, and hygiene programs in drought-prone areas.', posted:'05-05-2026', verified:true},
+            {org:'Smart City Foundation', title:'Urban Innovation & Smart City Fellow', labels:['Jakarta','Urban development','0 to 4 yrs exp'], type:'Internship', rate:'19 offers &middot; Hybrid &middot; Start July 2026', desc:'Researching and piloting smart city solutions using data-driven approaches.', posted:'04-28-2026', verified:true},
+            {org:'Mangrove Restoration Project', title:'Coastal Ecosystem Restoration Lead', labels:['Kalimantan','Climate action','4 to 10 yrs exp'], type:'Long-term contract', rate:'5 offers &middot; No remote &middot; Start February 2027', desc:'Leading mangrove replanting programs engaging local communities in climate adaptation.', posted:'04-20-2026', verified:true},
+            {org:'Digital Literacy Initiative', title:'IT Training Coordinator for Rural Youth', labels:['Papua','Digital inclusion','2 to 6 yrs exp'], type:'Internship', rate:'9 offers &middot; No remote &middot; Start March 2027', desc:'Empowering rural youth with digital skills to access remote work and online learning opportunities.', posted:'04-15-2026', verified:true},
+            {org:'Wildlife Conservation Trust', title:'Anti-Poaching Patrol & Community Liaison', labels:['Sumatra','Wildlife protection','3 to 8 yrs exp'], type:'Long-term contract', rate:'11 offers &middot; No remote &middot; Start April 2027', desc:'Protecting endangered species through community engagement and anti-poaching patrols.', posted:'04-10-2026', verified:true},
+            {org:'Renewable Energy Initiative', title:'Solar Microgrid Field Engineer', labels:['East Java','Renewable energy','1 to 5 yrs exp'], type:'Internship', rate:'14 offers &middot; Remote friendly &middot; Start May 2027', desc:'Installing and maintaining solar microgrids in off-grid communities across East Java.', posted:'04-05-2026', verified:true},
+            {org:'Disability Inclusion Network', title:'Accessibility Program Officer', labels:['Jakarta','Disability rights','2 to 7 yrs exp'], type:'Long-term contract', rate:'7 offers &middot; Hybrid &middot; Start June 2027', desc:'Promoting disability inclusion in workplaces and public spaces through advocacy and training programs.', posted:'03-28-2026', verified:true},
+            {org:'Fisheries Co-Management Project', title:'Sustainable Fishing Community Facilitator', labels:['Maluku','Fisheries','4 to 10 yrs exp'], type:'Long-term contract', rate:'6 offers &middot; No remote &middot; Start July 2027', desc:'Working with fishing communities to implement sustainable fishing practices and improve livelihoods.', posted:'03-20-2026', verified:true}
+        ];
+
+        function renderJob(job) {
+            const labelsHTML = job.labels.map(l => `<span class="label">${l}</span>`).join('');
+            const div = document.createElement('div');
+            div.className = 'job-card-mkt anim-fade-up';
+            div.innerHTML = `
+                <div class="card-title-row">
+                    <span class="title"><a href="#" class="job-link">${job.title}</a></span>
+                    <span class="type-badge">${job.type}</span>
+                    <span class="card-date">Posted ${job.posted}</span>
+                </div>
+                <div class="card-byline">${job.org}${job.verified ? '<span class="verified-badge">&#10003;</span>' : ''}</div>
+                <div class="card-rate">${job.rate}</div>
+                <div class="card-desc">${job.desc}</div>
+                <div class="card-labels">${labelsHTML}</div>`;
+            return div;
+        }
+
+        const sentinel = document.createElement('div');
+        sentinel.id = 'lazySentinel';
+        document.getElementById('jobList').after(sentinel);
+
+        let idx = 0;
+        const obs = new IntersectionObserver((entries) => {
+            if (!entries[0].isIntersecting || idx >= extraJobs.length) return;
+            const batch = extraJobs.slice(idx, idx + 3);
+            batch.forEach((job, i) => {
+                const el = renderJob(job);
+                el.style.animationDelay = (i * 0.15) + 's';
+                document.getElementById('jobList').appendChild(el);
+            });
+            idx += batch.length;
+            if (idx >= extraJobs.length) obs.disconnect();
+        }, { rootMargin: '300px' });
+
+        document.addEventListener('DOMContentLoaded', () => obs.observe(sentinel));
+
+        document.querySelectorAll('.job-link').forEach(el => {
+            el.addEventListener('click', e => {
+                e.preventDefault();
+                const href = el.href;
+                el.style.opacity = '0.6';
+                setTimeout(() => { window.location.href = href; }, 500);
+            });
+        });
+
+        function toggleMobileFilter() {
+            document.getElementById('filterWrap').classList.toggle('show');
+        }
+
+        function toggleExtraCats(e) {
+            e.preventDefault();
+            const cats = document.querySelector('.extra-cats');
+            const link = e.currentTarget;
+            cats.classList.toggle('d-none');
+            link.textContent = cats.classList.contains('d-none') ? 'View more' : 'View less';
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

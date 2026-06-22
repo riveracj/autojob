@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register – AutoJob</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233CACD7'/%3E%3Ctext x='16' y='23' font-family='Montserrat,sans-serif' font-weight='800' font-size='20' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        body { background: var(--aj-section-light); margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        .form-box { width: 100%; max-width: 380px; margin: 2rem auto; padding: 0 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .form-box h3 { font-weight: 800; text-align: center; margin-bottom: 0.35rem; }
+        .form-box .sub { text-align: center; color: var(--aj-muted); font-size: 0.88rem; margin-bottom: 1.75rem; }
+        .form-box .form-label { font-weight: 600; font-size: 0.85rem; color: var(--aj-heading); margin-bottom: 0.3rem; }
+        .form-box .form-control { border-radius: 8px; border: 1.5px solid var(--aj-border); padding: 0.55rem 0.85rem; font-size: 0.92rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .form-box .form-control:focus { border-color: var(--aj-primary); box-shadow: 0 0 0 3px rgba(60,172,215,0.15); }
+        .form-box .form-control.is-invalid { border-color: #dc3545; box-shadow: none; }
+        .form-box .form-control.is-invalid:focus { box-shadow: 0 0 0 3px rgba(220,53,69,0.15); }
+        .form-box .btn-primary { width: 100%; padding: 0.6rem; border-radius: 8px; font-size: 0.92rem; }
+        .form-box .form-check-label { font-size: 0.85rem; color: var(--aj-body); }
+        .form-box .bottom-link { text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: var(--aj-muted); }
+        .form-box .bottom-link a { color: var(--aj-primary); font-weight: 600; }
+        .role-selector { display: flex; gap: 0.75rem; }
+        .role-selector .role-card { flex: 1; border: 2px solid var(--aj-border); border-radius: 10px; padding: 0.85rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s; background: #fff; user-select: none; }
+        .role-selector .role-card:hover { border-color: var(--aj-primary); }
+        .role-selector .role-card.selected { border-color: var(--aj-primary); background: var(--aj-section-light); }
+        .role-selector .role-card .icon { font-size: 1.35rem; line-height: 1; margin-bottom: 0.2rem; }
+        .role-selector .role-card .name { font-weight: 700; font-size: 0.82rem; color: var(--aj-heading); }
+        .form-error { font-size: 0.78rem; color: #dc3545; margin-top: 0.25rem; display: none; line-height: 1.3; }
+        .form-error.show { display: block; }
+        .form-box .mb-3 { margin-bottom: 1rem !important; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AutoJob</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-primary btn-sm me-2" href="signin.html">Sign In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="form-box">
+        <h3>Create account</h3>
+        <p class="sub">Join AutoJob and start hiring smarter.</p>
+        <form onsubmit="event.preventDefault();handleRegister();">
+            <div class="mb-3">
+                <label class="form-label">I am a <span class="text-danger">*</span></label>
+                <div class="role-selector">
+                    <div class="role-card selected" data-role="employer" onclick="selectRole(this)">
+                        <div class="icon">&#128188;</div>
+                        <div class="name">Employer</div>
+                    </div>
+                    <div class="role-card" data-role="seeker" onclick="selectRole(this)">
+                        <div class="icon">&#128269;</div>
+                        <div class="name">Job Seeker</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="regName">Full name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="regName" placeholder="e.g. John Doe" autocomplete="name">
+                <div class="form-error" id="errName">Please enter your name.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="regEmail">Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="regEmail" placeholder="myname@company.com" autocomplete="email">
+                <div class="form-error" id="errEmail">Please enter a valid email.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="regPass">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" id="regPass" placeholder="Minimum 8 characters" autocomplete="new-password">
+                <div class="form-error" id="errPass">Minimum 8 characters required.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="regConfirm">Confirm password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" id="regConfirm" placeholder="Repeat your password" autocomplete="new-password">
+                <div class="form-error" id="errConfirm">Passwords must match.</div>
+            </div>
+            <div class="mb-3 form-check">
+                <input class="form-check-input" type="checkbox" id="agreeTerms">
+                <label class="form-check-label" for="agreeTerms">I agree to the <a href="terms.html">Terms &amp; Conditions</a> <span class="text-danger">*</span></label>
+                <div class="form-error" id="errTerms">You must agree to the terms.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+        </form>
+        <p class="bottom-link">Already have an account? <a href="signin.html">Sign in</a></p>
+    </div>
+    <script>
+        let selectedRole = 'employer';
+        function selectRole(el) {
+            document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedRole = el.dataset.role;
+        }
+        function handleRegister() {
+            let valid = true;
+            const name = document.getElementById('regName');
+            const email = document.getElementById('regEmail');
+            const pass = document.getElementById('regPass');
+            const confirm = document.getElementById('regConfirm');
+            const terms = document.getElementById('agreeTerms').checked;
+            if (!name.value.trim()) { name.classList.add('is-invalid'); document.getElementById('errName').classList.add('show'); valid = false; } else { name.classList.remove('is-invalid'); document.getElementById('errName').classList.remove('show'); }
+            if (!email.value.trim() || !email.value.includes('@')) { email.classList.add('is-invalid'); document.getElementById('errEmail').classList.add('show'); valid = false; } else { email.classList.remove('is-invalid'); document.getElementById('errEmail').classList.remove('show'); }
+            if (!pass.value || pass.value.length < 8) { pass.classList.add('is-invalid'); document.getElementById('errPass').classList.add('show'); valid = false; } else { pass.classList.remove('is-invalid'); document.getElementById('errPass').classList.remove('show'); }
+            if (pass.value !== confirm.value || !confirm.value) { confirm.classList.add('is-invalid'); document.getElementById('errConfirm').classList.add('show'); valid = false; } else { confirm.classList.remove('is-invalid'); document.getElementById('errConfirm').classList.remove('show'); }
+            if (!terms) { document.getElementById('errTerms').classList.add('show'); valid = false; } else { document.getElementById('errTerms').classList.remove('show'); }
+            if (valid) window.location.href = 'train.html';
+        }
+    </script>
+</body>
+</html>

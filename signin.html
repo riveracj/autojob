@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In – AutoJob</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233CACD7'/%3E%3Ctext x='16' y='23' font-family='Montserrat,sans-serif' font-weight='800' font-size='20' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        body { background: var(--aj-section-light); margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        .form-box { width: 100%; max-width: 360px; margin: 3rem auto; padding: 0 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .form-box h3 { font-weight: 800; text-align: center; margin-bottom: 0.35rem; }
+        .form-box .sub { text-align: center; color: var(--aj-muted); font-size: 0.88rem; margin-bottom: 1.75rem; }
+        .form-box .form-label { font-weight: 600; font-size: 0.85rem; color: var(--aj-heading); margin-bottom: 0.3rem; }
+        .form-box .form-control { border-radius: 8px; border: 1.5px solid var(--aj-border); padding: 0.55rem 0.85rem; font-size: 0.92rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .form-box .form-control:focus { border-color: var(--aj-primary); box-shadow: 0 0 0 3px rgba(60,172,215,0.15); }
+        .form-box .form-control.is-invalid { border-color: #dc3545; box-shadow: none; }
+        .form-box .form-control.is-invalid:focus { box-shadow: 0 0 0 3px rgba(220,53,69,0.15); }
+        .form-box .btn-primary { width: 100%; padding: 0.6rem; border-radius: 8px; font-size: 0.92rem; }
+        .form-box .form-check-label { font-size: 0.85rem; color: var(--aj-body); }
+        .form-box a.small { font-size: 0.82rem; color: var(--aj-primary) !important; font-weight: 600; }
+        .form-box .bottom-link { text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: var(--aj-muted); }
+        .form-box .bottom-link a { color: var(--aj-primary); font-weight: 600; }
+        .form-error { font-size: 0.78rem; color: #dc3545; margin-top: 0.25rem; display: none; line-height: 1.3; }
+        .form-error.show { display: block; }
+        .form-box .mb-3 { margin-bottom: 1rem !important; }
+        .social-btn { width: 100%; padding: 0.55rem; border-radius: 8px; border: 1.5px solid var(--aj-border); background: #fff; font-size: 0.88rem; font-weight: 600; color: var(--aj-heading); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'Lato', sans-serif; }
+        .social-btn:hover { border-color: var(--aj-primary); background: var(--aj-section-light); }
+        .social-btn .icon { font-size: 1.1rem; line-height: 1; }
+        .divider { display: flex; align-items: center; gap: 0.75rem; margin: 1.25rem 0; color: var(--aj-muted); font-size: 0.8rem; }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--aj-border); }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AutoJob</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-primary btn-sm me-2" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="form-box">
+        <h3>Welcome back</h3>
+        <p class="sub">Sign in to continue to your account.</p>
+
+        <button class="social-btn" onclick="window.location.href='#'"><span class="icon">&#9654;</span> Continue with Google</button>
+        <div style="height:0.5rem;"></div>
+        <button class="social-btn" onclick="window.location.href='#'"><span class="icon">&#63743;</span> Continue with Apple</button>
+
+        <div class="divider">or</div>
+
+        <form onsubmit="event.preventDefault();handleSignIn();">
+            <div class="mb-3">
+                <label class="form-label" for="signinEmail">Email</label>
+                <input type="email" class="form-control" id="signinEmail" placeholder="myname@company.com" autocomplete="email">
+                <div class="form-error" id="errEmail">Please enter a valid email address.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="signinPass">Password</label>
+                <input type="password" class="form-control" id="signinPass" placeholder="Enter your password" autocomplete="current-password">
+                <div class="form-error" id="errPass">Please enter your password.</div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                </div>
+                <a href="#">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+        <p class="bottom-link">Don't have an account? <a href="register.html">Register</a></p>
+    </div>
+    <script>
+        function handleSignIn() {
+            let valid = true;
+            const email = document.getElementById('signinEmail');
+            const pass = document.getElementById('signinPass');
+            if (!email.value.trim() || !email.value.includes('@')) {
+                email.classList.add('is-invalid'); document.getElementById('errEmail').classList.add('show'); valid = false;
+            } else {
+                email.classList.remove('is-invalid'); document.getElementById('errEmail').classList.remove('show');
+            }
+            if (!pass.value.trim()) {
+                pass.classList.add('is-invalid'); document.getElementById('errPass').classList.add('show'); valid = false;
+            } else {
+                pass.classList.remove('is-invalid'); document.getElementById('errPass').classList.remove('show');
+            }
+            if (valid) window.location.href = 'train.html';
+        }
+    </script>
+</body>
+</html>
